@@ -1,5 +1,3 @@
-import { count } from "./utils";
-
 /**
  * Хранилище состояния приложения
  */
@@ -7,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.nextItemCode = this.getMaxItemCode() + 1; // код для новой записи
   }
 
   /**
@@ -43,10 +42,12 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem() {
+  addItem(e) {
+    e.stopPropagation();
+
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: count(), title: 'Новая запись' }],
+      list: [...this.state.list, { code: this.nextItemCode++, title: 'Новая запись' }],
     });
   }
 
@@ -54,7 +55,9 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem(e, code) {
+    e.stopPropagation();
+    
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),
@@ -65,7 +68,9 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(code) {
+  selectItem(e, code) {
+    e.stopPropagation();
+
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
@@ -81,6 +86,16 @@ class Store {
         return item;
       }),
     });
+  }
+
+  /**
+   * Получение кода записи с максимальным числом
+   * @return {Number}
+   */
+  getMaxItemCode() {
+    return this.state.list.reduce((res, item) => {
+      return (item.code > res) ? item.code : res;
+    }, 0);
   }
 }
 

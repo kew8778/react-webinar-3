@@ -1,5 +1,5 @@
 import React from 'react';
-import { createElement, plur } from './utils.js';
+import { plur } from './utils.js';
 import './styles.css';
 
 /**
@@ -16,7 +16,7 @@ function App({ store }) {
         <h1>Приложение на чистом JS</h1>
       </div>
       <div className="App-controls">
-        <button onClick={() => store.addItem()}>Добавить</button>
+        <button onClick={(e) => store.addItem(e)}>Добавить</button>
       </div>
       <div className="App-center">
         <div className="List">
@@ -24,14 +24,14 @@ function App({ store }) {
             <div key={item.code} className="List-item">
               <div
                 className={'Item' + (item.selected ? ' Item_selected' : '')}
-                onClick={() => store.selectItem(item.code)}
+                onClick={(e) => store.selectItem(e, item.code)}
               >
                 <div className="Item-code">{item.code}</div>
                 <div className="Item-title">{item.title +
                   (item.count ? ` | Выделяли ${plur(item.count, ['раз', 'раза', 'раз'])}` : '')}
                 </div>
                 <div className="Item-actions">
-                  <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
+                  <button onClick={(e) => store.deleteItem(e, item.code)}>Удалить</button>
                 </div>
               </div>
             </div>
