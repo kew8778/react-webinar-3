@@ -42,9 +42,7 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem(e) {
-    e.stopPropagation();
-
+  addItem() {
     this.setState({
       ...this.state,
       list: [...this.state.list, { code: this.nextItemCode++, title: 'Новая запись' }],
@@ -55,9 +53,7 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(e, code) {
-    e.stopPropagation();
-    
+  deleteItem(code) {
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),
@@ -68,9 +64,7 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(e, code) {
-    e.stopPropagation();
-
+  selectItem(code) {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
