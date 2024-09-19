@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
+import Cart from './components/cart';
 
 /**
  * Приложение
@@ -10,37 +11,62 @@ import PageLayout from './components/page-layout';
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const list = store.getState().list;
+  const {list, cart} = store.getState();
+  const [isShowCart, setShowingCart] = useState(false);
+  const itemsInCart = cart.length;
+  const totalPriceInCart = cart.reduce((sum, item) => sum + item.count * item.price, 0);
 
   const callbacks = {
-    onDeleteItem: useCallback(
+    onAddToCart: useCallback(
       code => {
-        store.deleteItem(code);
+        store.addToCart(code);
       },
       [store],
     ),
 
-    onSelectItem: useCallback(
+    onOpenCart: useCallback(
+      () => {
+        setShowingCart(true);
+      },
+      [isShowCart],
+    ),
+
+    onCloseCart: useCallback(
+      () => {
+        setShowingCart(false);
+      },
+      [isShowCart],
+    ),
+
+    onDeleteCartItem: useCallback(
       code => {
-        store.selectItem(code);
+        store.deleteCartItem(code);
       },
       [store],
     ),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store]),
   };
 
   return (
     <PageLayout>
-      <Head title="Приложение на чистом JS" />
-      <Controls onAdd={callbacks.onAddItem} />
+      <Head title="Магазин" />
+      <Controls
+        onOpenCart={callbacks.onOpenCart}
+        items={itemsInCart}
+        total={totalPriceInCart}
+      />
       <List
         list={list}
-        onDeleteItem={callbacks.onDeleteItem}
-        onSelectItem={callbacks.onSelectItem}
+        onBtn={callbacks.onAddToCart}
+        btnText="Добавить"
       />
+      {isShowCart &&
+        <Cart 
+          cart={cart} 
+          onCloseCart={callbacks.onCloseCart}
+          onDeleteCartItem={callbacks.onDeleteCartItem}
+          total={totalPriceInCart}
+        />
+      }
     </PageLayout>
   );
 }

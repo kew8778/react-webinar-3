@@ -50,3 +50,19 @@ export const generateCode1 = (function (start = 0) {
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : (generateCode2.value = 1);
 }
+
+/**
+ * Преобразование числа в формат 123 456 789
+ * @param num {String|Number} исходная строка с числом
+ * @returns {String}
+ */
+export function formatNum(num) {
+  num = String(num);
+  let res = '';
+
+  for (let i = num.length - 1, j = 1; i >= 0; i--, j++) {
+    res = ( (j % 3 || !i) ? num[i] : ' ' + num[i] ) + res;
+  }
+
+  return res;
+}

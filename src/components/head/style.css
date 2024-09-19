@@ -1,9 +1,17 @@
 .Head {
+  display: flex;
   height: 80px;
   background: #f5f5f5;
 }
 
-.Head h1 {
+.Head-title {
+  flex-grow: 1;
   margin: 0;
   padding: 20px 20px 10px;
+}
+
+.Head-right {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 20px 10px;
 }

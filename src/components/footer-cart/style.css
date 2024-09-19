@@ -1,16 +1,14 @@
-.Controls {
+.FooterCart {
   display: flex;
   justify-content: flex-end;
   padding: 20px;
 
   font-size: 1.125em;
-}
-
-.Controls-total {
-  padding: 0 20px 0 15px;
   font-weight: bold;
 }
 
-.Controls-btn {
-  min-width: 80px;
+.FooterCart-total {
+  width: 100px;
+  padding-right: 100px;
+  text-align: right;
 }
