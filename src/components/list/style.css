@@ -3,6 +3,8 @@
 
 .List-item {
   border-bottom: 1px dashed #ccc;
+  box-sizing: border-box;
+  height: 61px;
 }
 
 .List-item:first-child {

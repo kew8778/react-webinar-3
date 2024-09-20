@@ -3,7 +3,10 @@ import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
-import Cart from './components/cart';
+import Modal from './components/modal';
+import FooterCart from './components/footer-cart';
+import Item from './components/item';
+import ItemCart from './components/itemCart';
 
 /**
  * Приложение
@@ -57,16 +60,24 @@ function App({ store }) {
       <List
         list={list}
         onBtn={callbacks.onAddToCart}
-        btnText="Добавить"
+        childNode={<Item/>}
       />
+        
+
       {isShowCart &&
-        <Cart 
-          cart={cart} 
-          onCloseCart={callbacks.onCloseCart}
-          onDeleteCartItem={callbacks.onDeleteCartItem}
-          total={totalPriceInCart}
-        />
+        <Modal>
+          <Head title="Корзина">
+            <button onClick={callbacks.onCloseCart}>Закрыть</button>
+          </Head>
+          <List
+            list={cart}
+            onBtn={callbacks.onDeleteCartItem}
+            childNode={<ItemCart/>}
+          />
+          <FooterCart total={totalPriceInCart} />
+        </Modal>
       }
+
     </PageLayout>
   );
 }

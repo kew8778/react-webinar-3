@@ -1,25 +1,33 @@
-.Item {
+.ItemCart {
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
 }
 
-.Item-code {
+.ItemCart-code {
   padding: 20px 10px 20px 20px;
 }
 
-.Item-title {
+.ItemCart-title {
   flex-grow: 1;
   padding: 20px 10px;
 }
 
-.Item-price {
+.ItemCart-price {
   padding: 20px 10px;
   font-size: 1.125em;
   color: #404040;
 }
 
-.Item-actions {
+.ItemCart-count {
+  width: 80px;
+  padding: 20px 10px;
+  font-size: 1.125em;
+  color: #404040;
+  text-align: right;
+}
+
+.ItemCart-actions {
   display: flex;
   justify-content: flex-end;
   padding: 20px 20px 20px 10px;

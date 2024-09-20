@@ -11,7 +11,6 @@
 }
 
 .Head-right {
-  display: flex;
-  align-items: center;
-  padding: 20px 20px 20px 10px;
+  padding-top: 32px;
+  padding-right: 32px;
 }

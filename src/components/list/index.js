@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import Item from '../item';
 import './style.css';
 
-function List({ list, onBtn = () => {}, btnText }) {
+function List({ list, onBtn = () => {}, childNode }) {
   return (
     <div className="List">
       {list.map(item => (
         <div key={item.code} className="List-item">
-          <Item item={item} onBtn={onBtn} btnText={btnText} />
+          {cloneElement(childNode, {item: item, onBtn: onBtn})}
         </div>
       ))}
     </div>
@@ -21,8 +20,8 @@ List.propTypes = {
       code: PropTypes.number,
     }),
   ).isRequired,
+  childNode: PropTypes.node.isRequired,
   onBtn: PropTypes.func,
-  btnText: PropTypes.string,
 };
 
 export default React.memo(List);
