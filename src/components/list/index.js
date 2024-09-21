@@ -1,16 +1,16 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function List({ list, childNode }) {
+function List({ list, renderItem = () => {} }) {
   const cn = bem('List');
 
   return (
     <div className={cn()}>
       {list.map(item => (
         <div key={item.code} className={cn('item')}>
-          {cloneElement(childNode, {item: item})}
+          {renderItem(item)}
         </div>
       ))}
     </div>
@@ -23,7 +23,7 @@ List.propTypes = {
       code: PropTypes.number,
     }),
   ).isRequired,
-  childNode: PropTypes.node.isRequired,
+  renderItem: PropTypes.func,
 };
 
 export default React.memo(List);

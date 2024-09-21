@@ -8,7 +8,8 @@
 }
 
 .FooterCart-total {
-  width: 100px;
+  min-width: 80px;
   padding-right: 100px;
+  padding-left: 20px;
   text-align: right;
 }

@@ -47,6 +47,20 @@ function App({ store }) {
       },
       [store],
     ),
+
+    renderItem: useCallback(
+      item => {
+        return <Item onBtn={callbacks.onAddToCart} item={item} />
+      },
+      [store],
+    ),
+
+    renderItemCart: useCallback(
+      item => {
+        return <ItemCart onBtn={callbacks.onDeleteCartItem} item={item} />
+      },
+      [store],
+    ),
   };
 
   return (
@@ -59,7 +73,7 @@ function App({ store }) {
       />
       <List
         list={list}
-        childNode={<Item onBtn={callbacks.onAddToCart} />}
+        renderItem={callbacks.renderItem}
       />
       {isShowCart &&
         <Modal>
@@ -68,7 +82,7 @@ function App({ store }) {
           </Head>
           <List
             list={cart}
-            childNode={<ItemCart onBtn={callbacks.onDeleteCartItem} />}
+            renderItem={callbacks.renderItemCart}
           />
           <FooterCart total={totalPriceInCart} />
         </Modal>

@@ -23,4 +23,5 @@ body {
 
 button {
   min-width: 76px;
+  font: 13px/1.15 Arial, sans-serif;
 }
