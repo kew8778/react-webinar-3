@@ -1,7 +1,9 @@
 .Item {
   display: flex;
   justify-content: flex-start;
-  transition: background-color 1s;
+  border-bottom: 1px dashed #ccc;
+  box-sizing: border-box;
+  height: 61px;
 }
 
 .Item-code {

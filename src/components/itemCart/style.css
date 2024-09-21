@@ -1,7 +1,9 @@
 .ItemCart {
   display: flex;
   justify-content: flex-start;
-  transition: background-color 1s;
+  border-bottom: 1px dashed #ccc;
+  box-sizing: border-box;
+  height: 63px;
 }
 
 .ItemCart-code {

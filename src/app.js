@@ -59,11 +59,8 @@ function App({ store }) {
       />
       <List
         list={list}
-        onBtn={callbacks.onAddToCart}
-        childNode={<Item/>}
+        childNode={<Item onBtn={callbacks.onAddToCart} />}
       />
-        
-
       {isShowCart &&
         <Modal>
           <Head title="Корзина">
@@ -71,13 +68,11 @@ function App({ store }) {
           </Head>
           <List
             list={cart}
-            onBtn={callbacks.onDeleteCartItem}
-            childNode={<ItemCart/>}
+            childNode={<ItemCart onBtn={callbacks.onDeleteCartItem} />}
           />
           <FooterCart total={totalPriceInCart} />
         </Modal>
       }
-
     </PageLayout>
   );
 }
